@@ -1,0 +1,216 @@
+%LET PATH =C:\as2;
+Libname new "&PATH";
+Filename ZIPFILE SASZIPAM "&PATH\samadult2010.zip";
+data new.adult2010;
+INFILE ZIPFILE(SAMADULT.dat)  PAD LRECL=906;
+input 
+FMX      	16-17   	
+FPX      	18-19
+HHX      	7-12
+RECTYPE   	1 -   2   /* File type identifier */  
+SRVY_YR   	3 -   6   /* Survey year */ 
+WTFA_SA  	27 -  32   /* Final weight */
+STRAT_P  	34 -  36   /* Pseudo-stratum for PUF variance estimation */
+SEX      	39
+RACERPI2 	42 -  43   /* OMB groups w/multiple race */
+AGE_P    	48 -  49   /* Age reported */
+SAD     	372 - 372
+NERVOUS 	373 - 373	
+RESTLESS	374 - 374  	
+HOPELESS	375 - 375	
+EFFORT  	376 - 376  	
+WORTHLS 	377 - 377 ;
+Run;
+Filename ZIPFILE SASZIPAM "&PATH\samadult2011.zip";
+data new.adult2011;
+INFILE ZIPFILE(SAMADULT.dat)  PAD LRECL=827;
+input  
+FMX      	16-17   	
+FPX      	18-19
+HHX      	7-12
+RECTYPE   	1 -   2   /* File type identifier */  
+SRVY_YR   	3 -   6   /* Survey year */ 
+WTFA_SA  	27 -  32   /* Final weight */
+STRAT_P  	34 -  36   /* Pseudo-stratum for PUF variance estimation */
+SEX      	39
+RACERPI2 	42 -  43   /* OMB groups w/multiple race */
+AGE_P    	48 -  49   /* Age reported */
+SAD     	264 - 264
+NERVOUS 	265 - 265	
+RESTLESS	266 - 266  	
+HOPELESS	267 - 267	
+EFFORT  	268 - 268  	
+WORTHLS 	269 - 269 ;
+Run;
+Filename ZIPFILE SASZIPAM "&PATH\samadult2012.zip";
+data new.adult2012;
+INFILE ZIPFILE(samadult.dat)  PAD LRECL=1086;
+input  
+FMX      	16-17   	
+FPX      	18-19
+HHX      	7-12
+RECTYPE   	1 -   2   /* File type identifier */  
+SRVY_YR   	3 -   6   /* Survey year */ 
+WTFA_SA  	27 -  32   /* Final weight */
+STRAT_P  	34 -  36   /* Pseudo-stratum for PUF variance estimation */
+SEX      	39
+RACERPI2 	42 -  43   /* OMB groups w/multiple race */
+AGE_P    	48 -  49   /* Age reported */
+SAD     	330 - 330
+NERVOUS 	331 - 331	
+RESTLESS	332 - 332  	
+HOPELESS	333 - 333	
+EFFORT  	334 - 334  	
+WORTHLS 	335 - 335
+Run;
+
+Filename ZIPFILE SASZIPAM "&PATH\samadult2013.zip";
+data new.adult2013;
+INFILE ZIPFILE(samadult.dat)  PAD LRECL=1021;
+input 
+FMX      	16-17   	
+FPX      	18-19
+HHX      	7-12
+RECTYPE   	1 -   2   /* File type identifier */  
+SRVY_YR   	3 -   6   /* Survey year */ 
+WTFA_SA  	27 -  32   /* Final weight */
+STRAT_P  	34 -  36   /* Pseudo-stratum for PUF variance estimation */
+SEX      	39
+RACERPI2 	42 -  43   /* OMB groups w/multiple race */
+AGE_P    	48 -  49   /* Age reported */
+ASISAD  	1002 - 1002
+ASINERV 	1003 - 1003	
+ASIRSTLS	1004 - 1004  	
+ASIHOPLS	1005 - 1005	
+ASIEFFRT	1006 - 1006  	
+ASIWTHLS	1007 - 1007 ;
+Run;
+Filename ZIPFILE SASZIPAM "&PATH\samadult2014.zip";
+data new.adult2014;
+INFILE ZIPFILE(samadult.dat)  PAD LRECL=1087;
+input  
+FMX      	16-17   	
+FPX      	18-19
+HHX      	7-12
+RECTYPE   	1 -   2   /* File type identifier */  
+SRVY_YR   	3 -   6   /* Survey year */ 
+WTFA_SA  	27 -  32   /* Final weight */
+STRAT_P  	34 -  36   /* Pseudo-stratum for PUF variance estimation */
+SEX      	39
+RACERPI2 	42 -  43   /* OMB groups w/multiple race */
+AGE_P    	48 -  49   /* Age reported */
+ASISAD  	1067 - 1067
+ASINERV 	1068 - 1068	
+ASIRSTLS	1069 - 1069  	
+ASIHOPLS	1070 - 1070	
+ASIEFFRT	1071 - 1071  	
+ASIWTHLS	1072 - 1072 ;
+Run;
+
+Filename ZIPFILE SASZIPAM "&PATH\samadult2015.zip";
+data new.adult2015;
+INFILE ZIPFILE(samadult.dat)  PAD LRECL=904;
+input  
+FMX      	16-17   	
+FPX      	18-19
+HHX      	7-12
+RECTYPE   	1 -   2   /* File type identifier */  
+SRVY_YR   	3 -   6   /* Survey year */ 
+WTFA_SA  	27 -  32   /* Final weight */
+STRAT_P  	34 -  36   /* Pseudo-stratum for PUF variance estimation */
+SEX      	39
+RACERPI2 	42 -  43   /* OMB groups w/multiple race */
+AGE_P    	48 -  49   /* Age reported */
+ASISAD  	884 - 884
+ASINERV 	885 - 885	
+ASIRSTLS	886 - 886  	
+ASIHOPLS	887 - 887	
+ASIEFFRT	888 - 888  	
+ASIWTHLS	889 - 889 ;
+run;
+
+DATA new.alldata;
+	set new.adult2010
+    	new.adult2011
+    	new.adult2012
+ 	    new.adult2013(rename=(ASISAD=SAD ASINERV=NERVOUS ASIRSTLS=RESTLESS ASIHOPLS=HOPELESS ASIEFFRT=EFFORT ASIWTHLS=WORTHLS))
+    	new.adult2014(rename=(ASISAD=SAD ASINERV=NERVOUS ASIRSTLS=RESTLESS ASIHOPLS=HOPELESS ASIEFFRT=EFFORT ASIWTHLS=WORTHLS))
+    	new.adult2015(rename=(ASISAD=SAD ASINERV=NERVOUS ASIRSTLS=RESTLESS ASIHOPLS=HOPELESS ASIEFFRT=EFFORT ASIWTHLS=WORTHLS));
+ID=_n_;
+if SAD=1 then SAD_recod=4;
+else if SAD=2 then SAD_recod=3;
+else if SAD=3 then SAD_recod=2;
+else if SAD=4 then SAD_recod=1;  	
+else if SAD=5 then SAD_recod=0;    	
+else SAD_record=.;
+if NERVOUS=1 then NERVOUS_recod=4;    	
+else if NERVOUS=2 then NERVOUS_recod=3;
+else if NERVOUS=3 then NERVOUS_recod=2;
+else if NERVOUS=4 then NERVOUS_recod=1;
+else if NERVOUS=5 then NERVOUS_recod=0;
+else NERVOUS_recod=.;
+ if RESTLESS=1 then RESTLESS_recod=4;
+ else if RESTLESS=2 then RESTLESS_recod=3;
+ else if RESTLESS=3 then RESTLESS_recod=2;
+	else if RESTLESS=4 then RESTLESS_recod=1;
+ else if RESTLESS=5 then RESTLESS_recod=0;
+ else RESTLESS_recod=.;
+ if HOPELESS=1 then HOPELESS_recod=4;
+ else if HOPELESS=2 then HOPELESS_recod=3;
+ else if HOPELESS=3 then HOPELESS_recod=2;
+	else if HOPELESS=4 then HOPELESS_recod=1;
+ else if HOPELESS=5 then HOPELESS_recod=0;
+ else HOPELESS_recod=.;
+ if EFFORT=1 then EFFORT_recod=4;
+ else if EFFORT=2 then EFFORT_recod=3;
+ else if EFFORT=3 then EFFORT_recod=2;
+	else if EFFORT=4 then EFFORT_recod=1;
+ else if EFFORT=5 then EFFORT_recod=0;
+ else EFFORT_recod=.;
+ if WORTHLS=1 then WORTHLS_recod=4;
+ else if WORTHLS=2 then WORTHLS_recod=3;
+ else if WORTHLS=3 then WORTHLS_recod=2;
+	else if WORTHLS=4 then WORTHLS_recod=1;
+ else if WORTHLS=5 then WORTHLS_recod=0;
+ else WORTHLS_recod=.;
+
+ K6SUM=SUM(SAD_recod,NERVOUS_recod,RESTLESS_recod,HOPELESS_recod,EFFORT_recod,WORTHLS_recod);
+	if K6SUM>12 then SPD=1;
+ else if 0<=K6SUM<=12 then SPD=0;
+ else if K6SUM=. then SPD=.;
+run;
+proc print data=alldata noobs;
+Run;
+
+PROC FORMAT library=new;
+VALUE sexfmt 1='Male'
+      	     2='Female';
+VALUE racefmt 1='White'
+       	      2='African American'
+ 	          3='Asian'
+ 	          4='AIAN'
+ 	          5=.
+			  6='Multiple Race'
+
+VALUE agefmt  18-49='18-49 Years'
+              50-64='50-64 Years'
+			  60-high='60+ Years'
+run;
+
+proc surveymeans data=new.alldata NOBS MEAN STDERR;
+    var  spd;
+    domain SEX*RACERPI2*AGE_P;
+    weight WTFA_SA;
+    cluster PSU_P;
+    strata STRAT_P;
+    format SEX sexfmt.
+           AGE_P agefmt.
+           RACERPI2 racefmt.;
+ By SRVY_YR;
+  ods output statistics=Overall;
+ ods output domain=by_sex;
+   run;
+   ods _all_ close;
+   ods listing;
+   proc print data=overall; run;
+   proc print data=by_sex (drop=DomainLabel varname); run;
